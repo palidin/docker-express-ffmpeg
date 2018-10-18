@@ -15,6 +15,7 @@ rm temp-init-db.js & \
 touch $lockfile& \
 fi
 
+
 redis-server &
 mongod -auth --bind_ip 127.0.0.1 --port 27017 --dbpath /data/db --fork --logpath /data/log/mongodb.log &
 wait $!
