@@ -8,6 +8,7 @@ WORKDIR /express-ffmpeg/
 
 RUN npm install && \
 	npm rebuild node-sass && \
+	npm install -g pm2 && \
 	wget https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-64bit-static.tar.xz && \
 	tar xvf ffmpeg-git-*-static.tar.xz && \
 	mv ffmpeg-git-*/ffmpeg ffmpeg-git-*/ffprobe /usr/bin/ && \
@@ -21,7 +22,7 @@ RUN npm install && \
 COPY ./docker-entrypoint.sh ./auth.js /
 
 RUN mkdir -p /data/db -p /data/log /express-ffmpeg/config && \
-	cp /auth.js /express-ffmpeg/config/ && \
+	mv /auth.js /express-ffmpeg/config/ && \
 	chmod +x /docker-entrypoint.sh
 
 EXPOSE 3000

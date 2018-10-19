@@ -19,4 +19,11 @@ fi
 redis-server &
 mongod -auth --bind_ip 127.0.0.1 --port 27017 --dbpath /data/db --fork --logpath /data/log/mongodb.log &
 wait $!
-node /express-ffmpeg/bin/www
+
+if [ "$RUN_MODE" == "PM2" ]
+then
+    pm2 start /express-ffmpeg/bin/www --name app -i 0 & \
+        pm2 logs app
+else
+    node /express-ffmpeg/bin/www
+fi
