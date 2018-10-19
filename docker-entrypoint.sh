@@ -22,8 +22,9 @@ wait $!
 
 if [ "$RUN_MODE" == "PM2" ]
 then
-    pm2 start /express-ffmpeg/bin/www --name app -i 0 & \
-        pm2 logs app
+    pm2 start /express-ffmpeg/bin/www --name app -i 0
+    wait $!
+    pm2 logs app
 else
     node /express-ffmpeg/bin/www
 fi
