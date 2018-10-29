@@ -1,6 +1,17 @@
 #!/bin/bash
 
 lockfile="/data/lock"
+logdir="/data/log"
+dbdir="/data/db"
+
+if [ ! -d "$logdir" ];then
+  mkdir $logdir
+fi
+
+if [ ! -d "$dbdir" ];then
+  mkdir $dbdir
+fi
+
 if [ ! -f "$lockfile" ];then
 cat <<  EOF > temp-init-db.js
 use admin
@@ -8,6 +19,7 @@ use ffmpeg
 db.createUser({user:"ffmpeg",pwd:"ffmpeg",roles:[{role:"readWrite",db:"ffmpeg"}]})
 db.auth("ffmpeg","ffmpeg")
 EOF
+
 mongod --dbpath /data/db --fork --logpath /data/log/mongodb.log &
 wait $!
 mongo < temp-init-db.js
