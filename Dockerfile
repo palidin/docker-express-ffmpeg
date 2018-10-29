@@ -3,6 +3,7 @@ FROM node:8
 WORKDIR /
 
 RUN git clone https://gitee.com/quazero/express-ffmpeg.git && \
+	cd express-ffmpeg && \
 	git checkout 54124dc7c6ec712d21e06038a87ed2e265b50557
 
 WORKDIR /express-ffmpeg/
