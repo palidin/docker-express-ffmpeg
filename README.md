@@ -11,7 +11,7 @@ version: '2.1'
 
 services:
  express-ffmpeg:
-    image: palidin/express-ffmpeg:latest
+    image: palidin/express-ffmpeg:release
     ports:
       - 3000:3000
     privileged: true
